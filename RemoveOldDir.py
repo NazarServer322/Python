@@ -1,13 +1,11 @@
 import os 
 import time
+import shutil
 
-DAYS = 0.01
+DAYS = 0.1
 
-FOLDERS = [
-    "C:\\TestPythonDateRemove\\One",
-    "C:\\TestPythonDateRemove\\Two",
-    "C:\\TestPythonDateRemove\\Three"
-]
+FOLDERS = "C:\\TestPythonDateRemove"
+
 
 TOTAL_DELETED_SIZE = 0
 TOTAL_DELETED_FILE = 0
@@ -15,6 +13,7 @@ TOTAL_DELETED_DIRS = 0
 
 nowTime = time.time()
 Age = nowTime - 60*60*24*DAYS
+
 def delete_old_files(folder):
     global TOTAL_DELETED_FILE
     global TOTAL_DELETED_SIZE
@@ -29,12 +28,16 @@ def delete_old_files(folder):
                 print("file was delete" + str(fileName))
                 os.remove(fileName)
 def delete_empty_dir(folder):
-    global TOTAL_DELETED_DIRS
+    #global TOTAL_DELETED_DIRS
     for path, dirs, files in os.walk(folder):
-        if (not dirs) and (not files):
-            TOTAL_DELETED_DIRS =+ 1
-            print("delete empty dirs" + str(path))
-            os.rmdir(path )
+        for dir in dirs:
+            home = os.path.join(dir) 
+           # file_time = os.path.getmtime(home)
+            if home.startswith("VAT"): #and file_time < Age:
+                shutil.rmtree(home)
+
+           #sTOTAL_DELETED_DIRS =+ 1
+           # print("delete empty dirs" + str(path))
 
 
 
@@ -42,5 +45,5 @@ def delete_empty_dir(folder):
 
 ###################
 for folder in FOLDERS:
-    delete_old_files(folder)
+    #delete_old_files(folder)
     delete_empty_dir(folder)
