@@ -11,7 +11,7 @@ def weather(City):
     today = test['weather'][0]['description']
     inInt = int(tempcity)
     if  inInt < 0:
-        print("it's cold as pizdec")
+        print("it's cold as ppc")
     elif inInt in range (1,19):
         print("please wear warm clonthes")
     elif inInt > 20:
