@@ -1,4 +1,5 @@
-import pyodbc 
+import pyodbc
+from wsproto import connection 
 # Some other example server values are
 # server = 'localhost\sqlexpress' # for a named instance
 # server = 'myserver,port' # to specify an alternate port
@@ -8,7 +9,7 @@ username = ''
 password = '' 
 cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
 cursor = cnxn.cursor()
-
+connection.open()
 
 mySqlQuery =  (""" 
             SELECT * FROM dbo.Config_MessageQueueConfiguration;
